@@ -24,6 +24,7 @@ done
 # PROXMOX STORAGE IDs (The name of the storage in Datacenter -> Storage)
 DISK_STORAGE="SSD2"      # Where the VM disk goes  (Default: local-lvm)
 ISO_STORAGE_ID="SAS1"        # The Proxmox Storage ID for ISOs (Default: local)
+$ISO_PATH_ROOT="/mnt/pve/$ISO_STORAGE_ID/template/iso" # Path to ISO storage (Default: /var/lib/vz/template/iso)
 
 # FILE NAMES
 VIRTIO_ISO="virtio-win-0.1.285.iso"
