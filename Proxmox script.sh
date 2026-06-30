@@ -23,7 +23,7 @@ done
 
 # PROXMOX STORAGE IDs (The name of the storage in Datacenter -> Storage)
 DISK_STORAGE="SSD2"      # Where the VM disk goes  (Default: local-lvm)
-ISO_STORAGE_ID="SAS1"        # The Proxmox Storage ID for ISOs (Default: local)
+ISO_STORAGE_ID="SAS1"    # The Proxmox Storage ID for ISOs (Default: local)
 ISO_PATH_ROOT="/mnt/pve/$ISO_STORAGE_ID/template/iso/" # Path to ISO storage (Default: /var/lib/vz/template/iso)
 
 # FILE NAMES
@@ -31,7 +31,7 @@ VIRTIO_ISO="virtio-win-0.1.285.iso"
 OEM_ISO="windows1125h2.iso" # Generated ISO name (Default: win11-unattend-<VMID>.iso)
 ANSWER_FILE="autounattend.xml"
 
-DISK_SIZE="200G"
+DISK_SIZE="200" #Disk size in GB (Default: 200GB)
 OS_TYPE="win11"
 
 # --- Download Windows ISO ---
