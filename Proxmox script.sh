@@ -129,7 +129,7 @@ fi
 # Check for Windows 11 ISO
 echo "Searching for Windows 11 ISO in $ISO_PATH_ROOT..."
 # Find any ISO starting with Win11
-FOUND_ISO=$(find "$ISO_PATH_ROOT" -maxdepth 1 -name "Win11_*.iso" -type f | head -n 1)
+FOUND_ISO=$(find "$ISO_PATH_ROOT" -maxdepth 1 -name "Win11*.iso" -type f | head -n 1)
 
 if [ -n "$FOUND_ISO" ]; then
     WIN_ISO=$(basename "$FOUND_ISO")
