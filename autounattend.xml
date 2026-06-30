@@ -116,7 +116,7 @@
                         <Name>Admin</Name>
                         <Group>Administrators</Group>
                         <Password>
-                            <Value>PASSWORD_PLACEHOLDER</Value>
+                            <Value>P@ssw0rd</Value>
                             <PlainText>true</PlainText>
                         </Password>
                     </LocalAccount>
@@ -124,7 +124,7 @@
             </UserAccounts>
             <AutoLogon>
                 <Password>
-                    <Value>PASSWORD_PLACEHOLDER</Value>
+                    <Value>P@ssw0rd</Value>
                     <PlainText>true</PlainText>
                 </Password>
                 <Enabled>true</Enabled>
