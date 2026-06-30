@@ -3,9 +3,9 @@
 # --- Default Configuration ---
 VMID="2000"
 VM_NAME="Win11-HyperV"
-VM_MEMORY="32768"       # 32GB for Hyper-V compilation
-VM_CORES="16"            # 16 Cores for compilation
-VM_SOCKET="1"
+VM_MEMORY="32768"       # 32GB for Hyper-V
+VM_CORES="8"            # 16 Cores for compilation
+VM_SOCKET="2"           # 2 Sockets for Hyper-V
 ADMIN_PASSWORD="P@ssw0rd" # Default Password (Change this!)
 
 # Parse command line arguments
@@ -28,7 +28,7 @@ ISO_PATH_ROOT="/mnt/pve/$ISO_STORAGE_ID/template/iso/" # Path to ISO storage (De
 
 # FILE NAMES
 VIRTIO_ISO="virtio-win-0.1.285.iso"
-OEM_ISO="windows1125h2.iso" # Generated ISO name (Default: win11-unattend-<VMID>.iso)
+OEM_ISO="win11-unattend-${VMID}.iso" # Generated ISO name (Default: win11-unattend-<VMID>.iso)
 ANSWER_FILE="autounattend.xml"
 
 DISK_SIZE="200" #Disk size in GB (Default: 200GB)
@@ -58,7 +58,7 @@ download_windows_iso() {
     
     # Try to extract filename from URL or headers
     # Default name if extraction fails
-    local target_filename="windows1125h2.iso"
+    local target_filename="Win11_English_x64.iso"
     
     # Use curl to get the filename from headers if possible
     if command -v curl &> /dev/null; then
