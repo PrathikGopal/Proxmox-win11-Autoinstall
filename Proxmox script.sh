@@ -129,7 +129,7 @@ fi
 # Check for Windows 11 ISO
 echo "Searching for Windows 11 ISO in $ISO_PATH_ROOT..."
 # Find any ISO starting with Win11
-FOUND_ISO=$(find "$ISO_PATH_ROOT" -maxdepth 1 -name "windows11*.iso" -type f | head -n 1)
+FOUND_ISO=$(find "$ISO_PATH_ROOT" -maxdepth 1 -name "win11*.iso" -type f | head -n 1)
 
 if [ -n "$FOUND_ISO" ]; then
     WIN_ISO=$(basename "$FOUND_ISO")
@@ -181,7 +181,8 @@ cp "$ANSWER_FILE" "$TMP_ISO_DIR/"
 sed -i "s|PASSWORD_PLACEHOLDER|$ADMIN_PASSWORD|g" "$TMP_ISO_DIR/$ANSWER_FILE"
 
 # -V "OEMDRV" is important for some Windows versions to detect it automatically
-genisoimage -o "$ISO_PATH_ROOT/$OEM_ISO" -J -R -V "OEMDRV" "$TMP_ISO_DIR"
+#genisoimage -o "$ISO_PATH_ROOT/$OEM_ISO" -J -R -V "OEMDRV" "$TMP_ISO_DIR"
+genisoimage -o "$ISO_PATH_ROOT/$OEM_ISO" -b boot/etfsboot.com -no-emul-boot -c boot.catalog -eltorito-alt-boot -e efi/microsoft/boot/efisys.bin -no-emul-boot -J -R -V "OEMDRV" "$TMP_ISO_DIR"
 rm -rf "$TMP_ISO_DIR"
 
 # --- VM Creation ---
