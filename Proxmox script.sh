@@ -6,7 +6,7 @@ VM_NAME="Win11-HyperV"
 VM_MEMORY="32768"       # 32GB for Hyper-V
 VM_CORES="8"            # 16 Cores for compilation
 VM_SOCKET="2"           # 2 Sockets for Hyper-V
-VM_NETWORK="virtio,bridge=vmbr0,tag=90" # Network configuration (Default: virtio,bridge=vmbr0)
+VM_NETWORK="virtio,bridge=vmbr0,tag=90" # Network configuration with VLAN 90 (Default: virtio,bridge=vmbr0)
 ADMIN_PASSWORD="P@ssw0rd" # Default Password (Change this!)
 
 # Parse command line arguments
@@ -23,7 +23,7 @@ while getopts "i:n:m:c:p:h" opt; do
 done
 
 # PROXMOX STORAGE IDs (The name of the storage in Datacenter -> Storage)
-DISK_STORAGE="SSD2"      # Where the VM disk goes  (Default: local-lvm)
+DISK_STORAGE="SSD1"      # Where the VM disk goes  (Default: local-lvm)
 ISO_STORAGE_ID="SAS1"    # The Proxmox Storage ID for ISOs (Default: local)
 ISO_PATH_ROOT="/mnt/pve/$ISO_STORAGE_ID/template/iso/" # Path to ISO storage (Default: /var/lib/vz/template/iso)
 
