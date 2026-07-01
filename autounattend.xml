@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
-	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Unattended&UILanguage=en-US&Locale=en-US&Keyboard=00000409&GeoLocation=244&PEMode=Generated&InstallFromMode=Automatic&PartitionMode=Unattended&TargetDisk=0&SystemSize=300&PartitionLayout=Automatic&RecoveryMode=None&DiskAssertionMode=Generated&AssertMinSize=100&AssertMaxSize=200&AssertNoPartitions=true&WindowsEditionMode=Generic&WindowsEdition=pro&ProcessorArchitecture=amd64&ComputerNameMode=Custom&ComputerName=Win11-HyperV&TimeZoneMode=Explicit&TimeZone=India+Standard+Time&UserAccountMode=Unattended&AccountName0=Admin&AccountDisplayName0=&AccountPassword0=P%40ssw0rd&AccountGroup0=Administrators&AutoLogonMode=Own&PasswordExpirationMode=Unlimited&LockoutMode=Default&HideFiles=Hidden&TaskbarSearch=Box&TaskbarIconsMode=Default&StartTilesMode=Default&StartPinsMode=Default&CoreIsolationMode=Enabled&EffectsMode=Default&DesktopIconsMode=Default&StartFoldersMode=Default&VirtIoGuestTools=true&WifiMode=Skip&ExpressSettings=DisableAll&LockKeysMode=Skip&StickyKeysMode=Disabled&ColorMode=Default&WallpaperMode=Default&LockScreenMode=Default&RestartExplorer=true&AppLockerMode=Skip-->
+	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Unattended&UILanguage=en-US&Locale=en-US&Keyboard=00000409&GeoLocation=244&PEMode=Generated&InstallFromMode=Automatic&PartitionMode=Unattended&TargetDisk=0&SystemSize=300&PartitionLayout=Automatic&RecoveryMode=None&DiskAssertionMode=Generated&AssertMinSize=100&AssertMaxSize=200&AssertNoPartitions=true&WindowsEditionMode=Generic&WindowsEdition=pro&ProcessorArchitecture=amd64&ComputerNameMode=Custom&ComputerName=Win11-HyperV&TimeZoneMode=Explicit&TimeZone=India+Standard+Time&UserAccountMode=Unattended&AccountName0=Admin&AccountDisplayName0=LAB+Admin&AccountPassword0=P%40ssw0rd&AccountGroup0=Administrators&AutoLogonMode=Own&PasswordExpirationMode=Unlimited&LockoutMode=Default&HideFiles=Hidden&TaskbarSearch=Box&TaskbarIconsMode=Default&StartTilesMode=Default&StartPinsMode=Default&CoreIsolationMode=Enabled&EffectsMode=Default&DesktopIconsMode=Default&StartFoldersMode=Default&VirtIoGuestTools=true&WifiMode=Skip&ExpressSettings=DisableAll&LockKeysMode=Skip&StickyKeysMode=Disabled&ColorMode=Default&WallpaperMode=Default&LockScreenMode=Default&RestartExplorer=true&AppLockerMode=Skip-->
 	<settings pass="offlineServicing"></settings>
 	<settings pass="windowsPE">
 		<component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
@@ -189,7 +189,7 @@
 				<LocalAccounts>
 					<LocalAccount wcm:action="add">
 						<Name>Admin</Name>
-						<DisplayName></DisplayName>
+                        <DisplayName>LAB Admin</DisplayName>
 						<Group>Administrators</Group>
 						<Password>
 							<Value>P@ssw0rd</Value>
@@ -256,20 +256,29 @@
                 </SynchronousCommand>
 
                 <!-- App Installs -->
+                <!-- Install Git -->
                 <SynchronousCommand wcm:action="add">
                     <Order>8</Order>
                     <Description>Install Git</Description>
                     <CommandLine>powershell -NoProfile -ExecutionPolicy Bypass -Command "choco install git -y"</CommandLine>
                 </SynchronousCommand>
+                <!-- Install VS Code -->
                 <SynchronousCommand wcm:action="add">
                     <Order>9</Order>
                     <Description>Install VS Code</Description>
                     <CommandLine>powershell -NoProfile -ExecutionPolicy Bypass -Command "choco install vscode -y"</CommandLine>
                 </SynchronousCommand>
+                <!-- 1. Enable Hyper-V -->
                 <SynchronousCommand wcm:action="add">
                     <Order>10</Order>
                     <Description>Enable Hyper-V</Description>
                     <CommandLine>powershell -NoProfile -ExecutionPolicy Bypass -Command "Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart"</CommandLine>
+                </SynchronousCommand>
+                <!-- 2. Restart the computer to apply the Hyper-V changes -->
+                <SynchronousCommand wcm:action="add">
+                    <Order>11</Order>
+                    <Description>Restart to apply Hyper-V</Description>
+                    <CommandLine>shutdown /r /t 15 /c "Restarting in 15 seconds to finish installing Hyper-V..."</CommandLine>
                 </SynchronousCommand>
 			</FirstLogonCommands>
 		</component>
