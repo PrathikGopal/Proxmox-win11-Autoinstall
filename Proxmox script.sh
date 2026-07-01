@@ -6,6 +6,7 @@ VM_NAME="Win11-HyperV"
 VM_MEMORY="32768"       # 32GB for Hyper-V
 VM_CORES="8"            # 16 Cores for compilation
 VM_SOCKET="2"           # 2 Sockets for Hyper-V
+VM_NETWORK="virtio,bridge=vmbr0,tag=90" # Network configuration (Default: virtio,bridge=vmbr0)
 ADMIN_PASSWORD="P@ssw0rd" # Default Password (Change this!)
 
 # Parse command line arguments
@@ -196,7 +197,7 @@ qm create $VMID \
   --memory "$VM_MEMORY" \
   --cores "$VM_CORES" \
   --sockets "$VM_SOCKET" \
-  --net0 virtio,bridge=vmbr0 \
+  --net0 "$VM_NETWORK" \
   --ostype "$OS_TYPE" \
   --scsihw virtio-scsi-pci \
   --cpu host \
@@ -216,7 +217,7 @@ qm set $VMID --tpmstate0 $DISK_STORAGE:0,version=v2.0
 
 # 4. Attach ISOs
 echo "Attaching ISOs..."
-qm set $VMID --ide2 $ISO_STORAGE_ID:iso/$WIN_ISO,media=cdrom
+qm set $VMID --ide2 $ISO_STORAGE_ID:iso/$WIN_ISO,media=cdrom #qm set $VMID --ide2 $ISO_STORAGE_ID:iso/Win11_25H2_EnglishInternational_x64_v2.iso,media=cdrom
 qm set $VMID --ide3 $ISO_STORAGE_ID:iso/$VIRTIO_ISO,media=cdrom
 # Attach the generated answer file ISO
 qm set $VMID --sata0 $ISO_STORAGE_ID:iso/$OEM_ISO,media=cdrom
