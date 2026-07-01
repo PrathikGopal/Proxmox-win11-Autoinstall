@@ -254,7 +254,7 @@
                 <SynchronousCommand wcm:action="add">
                     <Order>7</Order>
                     <Description>Enable RDP</Description>
-                    <CommandLine><CommandLine>powershell.exe -NoProfile -WindowStyle Hidden -Command "Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name 'fDenyTSConnections' -Value 0; Enable-NetFirewallRule -DisplayGroup 'Remote Desktop'"</CommandLine>
+                    <CommandLine>powershell.exe -NoProfile -WindowStyle Hidden -Command "Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name 'fDenyTSConnections' -Value 0; Enable-NetFirewallRule -DisplayGroup 'Remote Desktop'"</CommandLine>
                 </SynchronousCommand>
                 <!-- 1. Enable Hyper-V -->
                 <SynchronousCommand wcm:action="add">
