@@ -218,26 +218,24 @@
 					<Order>1</Order>
 					<CommandLine>powershell.exe -WindowStyle "Normal" -ExecutionPolicy "Unrestricted" -NoProfile -File "C:\Windows\Setup\Scripts\FirstLogon.ps1"</CommandLine>
 				</SynchronousCommand>
-
                 <!-- Debloat: Disable Telemetry -->
                 <SynchronousCommand wcm:action="add">
-                    <Order>1</Order>
+                    <Order>2</Order>
                     <Description>Disable Telemetry</Description>
                     <CommandLine>reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTelemetry /t REG_DWORD /d 0 /f</CommandLine>
                 </SynchronousCommand>
                 <!-- Debloat: Disable Consumer Features (Bloat) -->
                 <SynchronousCommand wcm:action="add">
-                    <Order>2</Order>
+                    <Order>3</Order>
                     <Description>Disable Consumer Features</Description>
                     <CommandLine>reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableWindowsConsumerFeatures /t REG_DWORD /d 1 /f</CommandLine>
                 </SynchronousCommand>
                 <!-- Debloat: Disable Search Suggestions -->
                 <SynchronousCommand wcm:action="add">
-                    <Order>3</Order>
+                    <Order>4</Order>
                     <Description>Disable Search Suggestions</Description>
                     <CommandLine>reg add "HKCU\Software\Policies\Microsoft\Windows\Explorer" /v DisableSearchBoxSuggestions /t REG_DWORD /d 1 /f</CommandLine>
                 </SynchronousCommand>
-
                 <!-- OpenSSH Setup -->
                 <SynchronousCommand wcm:action="add">
                     <Order>5</Order>
@@ -254,7 +252,6 @@
                     <Description>Allow SSH in Firewall</Description>
                     <CommandLine>powershell -NoProfile -ExecutionPolicy Bypass -Command "if (!(Get-NetFirewallRule -Name 'OpenSSH-Server-In-TCP' -ErrorAction SilentlyContinue)) { New-NetFirewallRule -Name 'OpenSSH-Server-In-TCP' -DisplayName 'OpenSSH Server (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22 }"</CommandLine>
                 </SynchronousCommand>
-
                 <!-- App Installs -->
                 <!-- Install Git -->
                 <SynchronousCommand wcm:action="add">
