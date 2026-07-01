@@ -248,7 +248,7 @@
                 <SynchronousCommand wcm:action="add">
                     <Order>6</Order>
                     <Description>Download and Install VS Code System-Wide</Description>
-                    <CommandLine>powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -Command "$url = 'https://code.visualstudio.com/sha/download?build=stable&os=win32-x64'; $path = \"$env:TEMP\vscode_setup.exe\"; Invoke-WebRequest -Uri $url -OutFile $path; Start-Process $path -ArgumentList '/VERYSILENT', '/NORESTART', '/MERGETASKS=!runcode' -Wait; Remove-Item $path"</CommandLine>
+                    <CommandLine>powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -Command "winget install Microsoft.VisualStudioCode --silent --accept-source-agreements --accept-package-agreements"</CommandLine>
                 </SynchronousCommand>
                 <!-- Enable RDP -->
                 <SynchronousCommand wcm:action="add">
