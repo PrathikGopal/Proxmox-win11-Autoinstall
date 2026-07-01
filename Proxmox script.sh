@@ -4,8 +4,8 @@
 VMID="2000"
 VM_NAME="Win11-HyperV"
 VM_MEMORY="32768"       # 32GB for Hyper-V
-VM_CORES="8"            # 16 Cores for compilation
-VM_SOCKET="2"           # 2 Sockets for Hyper-V
+VM_CORES="16"            # 16 Cores for Hyper-V
+VM_SOCKET="1"           # 1 Socket for Hyper-V
 VM_NETWORK="virtio,bridge=vmbr0,tag=90" # Network configuration with VLAN 90 (Default: virtio,bridge=vmbr0)
 ADMIN_PASSWORD="P@ssw0rd" # Default Password (Change this!)
 
@@ -200,7 +200,8 @@ qm create $VMID \
   --net0 "$VM_NETWORK" \
   --ostype "$OS_TYPE" \
   --scsihw virtio-scsi-pci \
-  --cpu host \
+  --cpu "host,flags=+hv-evmcs;+hv-tlbflush;+pcid;+spec-ctrl" \
+  --numa 1 \
   --machine q35 \
   --bios ovmf
 
@@ -240,4 +241,3 @@ echo "3. The installation will proceed automatically (30-60 minutes)"
 echo "   - Windows setup: ~10 minutes"
 echo "   - Software installation (Hyper-V, VS Code, Git): ~20-30 minutes"
 echo "================================================"
-
